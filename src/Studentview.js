@@ -10,17 +10,14 @@ const Studentview = () => {
         phone:"",
         website:""
     });
-
-    const {id} = useParams();
-    
+    const {id} = useParams();    
     useEffect(() => {
         viewLoad();
     });
-
-     const viewLoad = async () => {
-         let  result = await axios.get(`http://localhost:3003/users/${id}`);
-         setUser(result.data);
-     } 
+    const viewLoad = async () => {
+        let  result = await axios.get(`http://localhost:3003/users/${id}`);
+        setUser(result.data);
+    } 
 
         return(
            <div className="container">

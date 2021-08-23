@@ -3,7 +3,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 const Edituser =  () => {
-    const [users, setUser]= useState({
+    let history = useHistory();
+    const [user, setUser]= useState({
         name:"",
         username:"",
         email:"",
@@ -11,23 +12,36 @@ const Edituser =  () => {
         website:""
     });
 
+    
     const {id} = useParams();
 
-   useEffect(() =>{
-       loadUsers();
-   },[]);
-    const {name,username,email, phone, website} = users;
+    const {name,username,email, phone, website} = user;
+    useEffect(() =>{
+        loadUsers();
+    },[]);
 
-    let history = useHistory();
+    const onInputChange = e => {
+        setUser({...user,[e.target.name]:e.target.value});
+    };
+    
+    const onSubmit = async e => {
+        e.preventDefault();
+        await axios.put(`http://localhost:3003/users/${id}`, user);
+        history.push("/teacher"); 
+    }
+
+
     const loadUsers = async () => {
         const result = await axios.get(`http://localhost:3003/users/${id}`);
         console.log(result);
         setUser(result.data);
     }
 
+   
+
     return <div>
-        
-                <form>
+        {/* <div>{JSON.stringify(user)}</div> */}
+        <form onSubmit={e => onSubmit(e)}>
                 <div className="card" style={{ width: '500px',margin:'50px' }}>
                 <div className="form-group">
                     <input 
@@ -35,6 +49,7 @@ const Edituser =  () => {
                     className="form-control form-control-lg"
                     name="name"
                     value={name}
+                    onChange={e => onInputChange(e) }
                     placeholder="enter first name"
                    
                     />
@@ -45,7 +60,8 @@ const Edituser =  () => {
                     type="text"
                     className="form-control form-control-lg"
                     name="username"
-                    name={username}
+                    value={username}
+                    onChange={e => onInputChange(e) }
                     placeholder="enter username name"
                    
                     />
@@ -57,6 +73,7 @@ const Edituser =  () => {
                     className="form-control form-control-lg"
                     name="email"
                     value={email}
+                    onChange={e => onInputChange(e) }
                     placeholder="enter first email"
                    
                     />
@@ -67,7 +84,8 @@ const Edituser =  () => {
                     type="text"
                     className="form-control form-control-lg"
                     name="phone"
-                    name={phone}
+                    value={phone}
+                    onChange={e => onInputChange(e) }
                     placeholder="enter phone"
                     />
                 </div>
@@ -78,6 +96,7 @@ const Edituser =  () => {
                     className="form-control form-control-lg"
                     name="website"
                     value={website}
+                    onChange={e => onInputChange(e) }
                     placeholder="enter website"
                    
                     />
