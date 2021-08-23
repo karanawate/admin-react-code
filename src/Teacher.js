@@ -2,8 +2,13 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {Link} from 'react-router-dom';
+import { render } from '@testing-library/react';
+
+
+ 
 
 const Teacher = () => {
+  
 const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -20,6 +25,12 @@ const [users, setUsers] = useState([]);
       loadUsers();
   }
 
+    const avatar_img = {
+     height:'50px',
+     width:'50px',
+     borderRadius:'5px'
+    }
+  
   return (
     <div>
       <table className="table">
@@ -36,7 +47,7 @@ const [users, setUsers] = useState([]);
           {users.map((user, index) => (
             <tr>
               <th scope="row">{index + 1}</th>
-              <td>{user.name}</td>
+              <td><img style={avatar_img} src={`https://ui-avatars.com/api/?bold=true&background=random&name=`+user.name} />{user.name}</td>
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.email}</td>
