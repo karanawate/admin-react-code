@@ -42,6 +42,7 @@ const [users, setUsers] = useState([]);
               <td>{user.email}</td>
               
               <td><Link class="btn btn-primary"  to={`/teacher/${user.id}`}>View</Link></td>
+              <td><Link class="btn btn-success "  to={`/edit/${user.id}`}>Edit</Link></td>
               <td><button class="btn btn-danger" onClick={() => deleteUsrs(user.id)}>Delete</button></td> 
             </tr>
           ))}

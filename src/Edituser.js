@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
-const Home =  () => {
+const Edituser =  () => {
     const [users, setUser]= useState({
         name:"",
         username:"",
@@ -10,31 +10,33 @@ const Home =  () => {
         phone:"",
         website:""
     });
-   
+
+    const {id} = useParams();
+
+   useEffect(() =>{
+       loadUsers();
+   },[]);
     const {name,username,email, phone, website} = users;
 
-    const onInputChange = e => {
-        setUser({...users,[e.target.name]:e.target.value});
-    };
-
     let history = useHistory();
-    const onSubmit = async e =>{
-        e.preventDefault();
-        await axios.post("http://localhost:3003/users/", users);
-        history.push("/");
+    const loadUsers = async () => {
+        const result = await axios.get(`http://localhost:3003/users/${id}`);
+        console.log(result);
+        setUser(result.data);
     }
 
     return <div>
         
-                <form onSubmit={e => onSubmit(e)}>
+                <form>
                 <div className="card" style={{ width: '500px',margin:'50px' }}>
                 <div className="form-group">
                     <input 
                     type="text"
                     className="form-control form-control-lg"
                     name="name"
+                    value={name}
                     placeholder="enter first name"
-                    onChange={e => onInputChange(e) }
+                   
                     />
                 </div>
 
@@ -43,8 +45,9 @@ const Home =  () => {
                     type="text"
                     className="form-control form-control-lg"
                     name="username"
+                    name={username}
                     placeholder="enter username name"
-                    onChange={e => onInputChange(e) }
+                   
                     />
                 </div>
 
@@ -53,8 +56,9 @@ const Home =  () => {
                     type="text"
                     className="form-control form-control-lg"
                     name="email"
+                    value={email}
                     placeholder="enter first email"
-                    onChange={e => onInputChange(e) }
+                   
                     />
                 </div>
 
@@ -63,8 +67,9 @@ const Home =  () => {
                     type="text"
                     className="form-control form-control-lg"
                     name="phone"
+                    name={phone}
                     placeholder="enter phone"
-                    onChange={e => onInputChange(e) }
+                   
                     />
                 </div>
 
@@ -73,8 +78,9 @@ const Home =  () => {
                     type="text"
                     className="form-control form-control-lg"
                     name="website"
+                    value={website}
                     placeholder="enter website"
-                    onChange={e => onInputChange(e) }
+                   
                     />
                 </div>
                 </div>
@@ -84,4 +90,4 @@ const Home =  () => {
     </div>
 }
 
-    export default Home;
+    export default Edituser;
