@@ -69,7 +69,6 @@ const Edituser =  () => {
                     name="phone"
                     name={phone}
                     placeholder="enter phone"
-                   
                     />
                 </div>
 
