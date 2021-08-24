@@ -6,7 +6,6 @@ import Home from "./Home";
 import Users from "./Users";
 import Studentview from "./Studentview";
 import Edituser from "./Edituser";
-
 import {BrowserRouter as Router,Route,Switch,Link } from "react-router-dom";
 
 
