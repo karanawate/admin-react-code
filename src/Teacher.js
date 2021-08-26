@@ -3,22 +3,37 @@ import { useState, useEffect } from "react";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
-const Teacher = () => {
+const Teacher = (props) => {
   
-const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     loadUsers();
   }, []);
+  useEffect(() => {
+    loadUsers();
+  }, [props.isNewAdded]);
 
   const loadUsers = async () => {
+    setIsLoading(true)
     const result = await axios.get("http://localhost:3003/users");
     setUsers(result.data);
+    setIsLoading(false)
+    // setTimeout(() => {
+    //   setIsLoading(false)
+    // }, 3000);
   };
 
   const deleteUsrs = async id =>{
+    setIsDeleting(id)
       await axios.delete(`http://localhost:3003/users/${id}`);
-      loadUsers();
+      
+      setTimeout(() => {
+        loadUsers();
+        setIsDeleting(null)
+      }, 2000);
   }
 
     const avatar_img = {
@@ -26,7 +41,13 @@ const [users, setUsers] = useState([]);
      width:'50px',
      borderRadius:'5px'
     }
-  
+  if (isLoading) {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
   return (
     <div>
       <table className="table">
@@ -50,7 +71,7 @@ const [users, setUsers] = useState([]);
               
               <td><Link class="btn btn-primary"  to={`/teacher/${user.id}`}>View</Link></td>
               <td><Link class="btn btn-success "  to={`/edit/${user.id}`}>Edit</Link></td>
-              <td><button class="btn btn-danger" onClick={() => deleteUsrs(user.id)}>Delete</button></td> 
+              <td><button disabled={isDeleting === user.id} class="btn btn-danger" onClick={() => deleteUsrs(user.id)}>{isDeleting === user.id ? 'Deleting...' : 'Delete'}</button></td> 
             </tr>
           ))}
         </tbody>
@@ -58,4 +79,4 @@ const [users, setUsers] = useState([]);
     </div>
   );
 };
-export default Teacher;
+export default React.forwardRef(Teacher);

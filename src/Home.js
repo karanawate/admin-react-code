@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Teacher from "./Teacher";
 
 const Home =  () => {
-    
+    const [isNewAdded, setIsNewAdded] = useState(false)
     const [users, setUser]= useState({
         name:"",
         username:"",
@@ -23,6 +23,8 @@ const Home =  () => {
     const onSubmit = async e =>{
         e.preventDefault();
         await axios.post("http://localhost:3003/users/", users);
+        // refetch the collection
+        setIsNewAdded(prev => !prev)
     }
 
     return <div>
@@ -81,7 +83,7 @@ const Home =  () => {
                 </div>
                 <button className="btn btn-primary btn-block">Add Teacher</button>
             </form>
-            <Teacher />
+            <Teacher isNewAdded={isNewAdded} />
     </div>
 }
 
