@@ -14,7 +14,6 @@ const Home =  () => {
     });
    
     const {name,username,email, phone, website} = users;
-
     const onInputChange = e => {
         const name  = e.target.name;
         const value = e.target.value;
@@ -25,14 +24,13 @@ const Home =  () => {
     const onSubmit = async e =>{
         e.preventDefault();
         await axios.post("http://localhost:3003/users/", users);
-        // refetch the collection
         e.target.reset()
+        // refetch the collection
         setIsNewAdded(prev => !prev)
     }
 
     return <div>
-        
-                <form onSubmit={e => onSubmit(e)}>
+                <form onSubmit={onSubmit}>
                 <div className="card" style={{ width: '500px',margin:'50px' }}>
                 <div className="form-group">
                     <input 
@@ -40,7 +38,7 @@ const Home =  () => {
                     className="form-control form-control-lg"
                     name="name"
                     placeholder="enter first name"
-                    onChange={e => onInputChange(e) }
+                    onChange={onInputChange}
                     />
                 </div>
 
@@ -50,7 +48,7 @@ const Home =  () => {
                     className="form-control form-control-lg"
                     name="username"
                     placeholder="enter username name"
-                    onChange={e => onInputChange(e) }
+                    onChange={onInputChange}
                     />
                 </div>
 
@@ -60,7 +58,7 @@ const Home =  () => {
                     className="form-control form-control-lg"
                     name="email"
                     placeholder="enter first email"
-                    onChange={e => onInputChange(e) }
+                    onChange={onInputChange}
                     />
                 </div>
 
@@ -70,7 +68,7 @@ const Home =  () => {
                     className="form-control form-control-lg"
                     name="phone"
                     placeholder="enter phone"
-                    onChange={e => onInputChange(e) }
+                    onChange={onInputChange}
                     />
                 </div>
 
@@ -80,7 +78,7 @@ const Home =  () => {
                     className="form-control form-control-lg"
                     name="website"
                     placeholder="enter website"
-                    onChange={e => onInputChange(e) }
+                    onChange={onInputChange}
                     />
                 </div>
                 </div>

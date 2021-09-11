@@ -2,7 +2,8 @@ import React from 'react';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-
+import { FaEdit } from "react-icons/fa";
+import { BsFillPersonFill } from "react-icons/bs";
 const Teacher = (props) => {
   
   const [users, setUsers] = useState([]);
@@ -12,7 +13,7 @@ const Teacher = (props) => {
   useEffect(() => {
     loadUsers();
   }, []);
-  
+
   useEffect(() => {
     loadUsers();
   }, [props.isNewAdded]);
@@ -58,7 +59,8 @@ const Teacher = (props) => {
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">Handle</th>
-            <th scope="col">operation</th>
+            <th scope="col">Email</th>
+            <th scope="col">Operation</th>
           </tr>
         </thead>
         <tbody>
@@ -69,9 +71,8 @@ const Teacher = (props) => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>{user.email}</td>
-              
-              <td><Link class="btn btn-primary"  to={`/teacher/${user.id}`}>View</Link></td>
-              <td><Link class="btn btn-success "  to={`/edit/${user.id}`}>Edit</Link></td>
+              <td><Link   to={`/teacher/${user.id}`}><BsFillPersonFill/></Link></td>
+              <td><Link   to={`/edit/${user.id}`}><FaEdit /></Link></td>
               <td><button disabled={isDeleting === user.id} class="btn btn-danger" onClick={() => deleteUsrs(user.id)}>{isDeleting === user.id ? 'Deleting...' : 'Delete'}</button></td> 
             </tr>
           ))}
