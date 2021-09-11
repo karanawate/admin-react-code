@@ -65,6 +65,7 @@ const Teacher = (props) => {
         </thead>
         <tbody>
           {users.map((user, index) => (
+            user.name === 'karan' ?
             <tr>
               <th scope="row">{index + 1}</th>
               <td><img style={avatar_img} src={`https://ui-avatars.com/api/?bold=true&background=random&name=`+user.name} />{user.name}</td>
@@ -75,6 +76,7 @@ const Teacher = (props) => {
               <td><Link   to={`/edit/${user.id}`}><FaEdit /></Link></td>
               <td><button disabled={isDeleting === user.id} class="btn btn-danger" onClick={() => deleteUsrs(user.id)}>{isDeleting === user.id ? 'Deleting...' : 'Delete'}</button></td> 
             </tr>
+            :null
           ))}
         </tbody>
       </table>
