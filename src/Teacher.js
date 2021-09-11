@@ -1,0 +1,81 @@
+import React from 'react';
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import {Link} from 'react-router-dom';
+
+const Teacher = (props) => {
+  
+  const [users, setUsers] = useState([]);
+  const [isDeleting, setIsDeleting] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+  useEffect(() => {
+    loadUsers();
+  }, [props.isNewAdded]);
+
+  const loadUsers = async () => {
+    setIsLoading(true)
+    const result = await axios.get("http://localhost:3003/users");
+    setUsers(result.data);
+    setIsLoading(false)
+    // setTimeout(() => {
+    //   setIsLoading(false)
+    // }, 3000);
+  };
+
+  const deleteUsrs = async id =>{
+    setIsDeleting(id)
+      await axios.delete(`http://localhost:3003/users/${id}`);
+      
+      setTimeout(() => {
+        loadUsers();
+        setIsDeleting(null)
+      }, 2000);
+  }
+
+    const avatar_img = {
+     height:'50px',
+     width:'50px',
+     borderRadius:'5px'
+    }
+  if (isLoading) {
+    return (
+      <div>
+        Loading...
+      </div>
+    )
+  }
+  return (
+    <div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+            <th scope="col">operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user, index) => (
+            <tr>
+              <th scope="row">{index + 1}</th>
+              <td><img style={avatar_img} src={`https://ui-avatars.com/api/?bold=true&background=random&name=`+user.name} />{user.name}</td>
+              <td>{user.username}</td>
+              <td>{user.email}</td>
+              <td>{user.email}</td>
+              <td><Link class="btn btn-primary"  to={`/teacher/${user.id}`}>View</Link></td>
+              <td><Link class="btn btn-success "  to={`/edit/${user.id}`}>Edit</Link></td>
+              <td><button disabled={isDeleting === user.id} class="btn btn-danger" onClick={() => deleteUsrs(user.id)}>{isDeleting === user.id ? 'Deleting...' : 'Delete'}</button></td> 
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+export default React.forwardRef(Teacher);
