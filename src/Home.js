@@ -16,7 +16,9 @@ const Home =  () => {
     const {name,username,email, phone, website} = users;
 
     const onInputChange = e => {
-        setUser({...users,[e.target.name]:e.target.value});
+        const name  = e.target.name;
+        const value = e.target.value;
+        setUser({...users, [name]:value});
     };
 
     let history = useHistory();
@@ -26,8 +28,6 @@ const Home =  () => {
         // refetch the collection
         e.target.reset()
         setIsNewAdded(prev => !prev)
-        setUser({name:'',username:'', email:'', phone:'', website:'' })
-
     }
 
     return <div>

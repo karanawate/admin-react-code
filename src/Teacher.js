@@ -12,6 +12,7 @@ const Teacher = (props) => {
   useEffect(() => {
     loadUsers();
   }, []);
+  
   useEffect(() => {
     loadUsers();
   }, [props.isNewAdded]);
