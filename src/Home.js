@@ -1,10 +1,12 @@
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import React, { useRef, useState } from 'react';
 import Teacher from "./Teacher";
-
+import { FiArrowLeft } from "react-icons/fi";
 const Home =  () => {
     const [isNewAdded, setIsNewAdded] = useState(false)
+    //use history go back to previous page
+    const location = useLocation();
     const [users, setUser]= useState({
         name:"",
         username:"",
@@ -12,7 +14,6 @@ const Home =  () => {
         phone:"",
         website:""
     });
-   
     const {name,username,email, phone, website} = users;
     const onInputChange = e => {
         const name  = e.target.name;
@@ -30,6 +31,7 @@ const Home =  () => {
     }
 
     return <div>
+                <button class="btn btn-primary" onClick={history.goBack}>Go back</button>
                 <form onSubmit={onSubmit}>
                 <div className="card" style={{ width: '500px',margin:'50px' }}>
                 <div className="form-group">

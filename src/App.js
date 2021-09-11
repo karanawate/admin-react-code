@@ -6,6 +6,7 @@ import Home from "./Home";
 import Users from "./Users";
 import Studentview from "./Studentview";
 import Edituser from "./Edituser";
+import View from "./View";
 import {BrowserRouter as Router,Route,Switch,Link } from "react-router-dom";
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route exact  path="/Teacher" component={Teacher} />
           <Route exact  path="/teacher/:id"  component={Studentview} />
           <Route exact  path="/edit/:id"  component={Edituser} />
+          <Route exact  path="/view"  component={View} />
         </Switch>
       </div>
     </Router>
