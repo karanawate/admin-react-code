@@ -24,7 +24,10 @@ const Home =  () => {
         e.preventDefault();
         await axios.post("http://localhost:3003/users/", users);
         // refetch the collection
+        e.target.reset()
         setIsNewAdded(prev => !prev)
+        setUser({name:'',username:'', email:'', phone:'', website:'' })
+
     }
 
     return <div>
