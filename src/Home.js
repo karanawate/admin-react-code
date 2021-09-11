@@ -5,8 +5,6 @@ import Teacher from "./Teacher";
 import { FiArrowLeft } from "react-icons/fi";
 const Home =  () => {
     const [isNewAdded, setIsNewAdded] = useState(false)
-    //use history go back to previous page
-    const location = useLocation();
     const [users, setUser]= useState({
         name:"",
         username:"",
@@ -31,7 +29,6 @@ const Home =  () => {
     }
 
     return <div>
-                <button class="btn btn-primary" onClick={history.goBack}>Go back</button>
                 <form onSubmit={onSubmit}>
                 <div className="card" style={{ width: '500px',margin:'50px' }}>
                 <div className="form-group">

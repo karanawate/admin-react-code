@@ -4,10 +4,16 @@ import { useHistory, useLocation } from 'react-router';
 const View = () => {
 	const location = useLocation();
 	const history = useHistory();
-	
+
 	return <div>
-		<p1>welcome view</p1>
-		<button class="btn btn-primary" onClick={history.goBack}>Go back</button>
+		<div>
+	    	<button class="btn btn-primary" onClick={history.goBack}>Go back</button>
+		</div>		
+		<div>
+			<button type="button" onClick={() => history.push('/')} class="btn btn-primary">
+				Create Session <span class="badge badge-light">9</span>
+			</button>
+		</div>
 	</div>
 }
 export default View;
