@@ -52,6 +52,9 @@ const Teacher = (props) => {
   }
   return (
     <div>
+        <div className="md-form mt-0" style={{width: "500px",marginLeft:"800px"}}>
+          <input className="form-control" type="text" placeholder="Search"  aria-label="Search" />
+        </div>
       <table className="table">
         <thead>
           <tr>
