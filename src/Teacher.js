@@ -42,6 +42,7 @@ const Teacher = (props) => {
      fetch("http://localhost:3003/users?q="+key).then((data) => {
       data.json().then((resp)=>{
         console.log(resp);
+        setUsers(resp)
       })
     })
     
