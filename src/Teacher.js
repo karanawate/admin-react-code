@@ -37,6 +37,15 @@ const Teacher = (props) => {
         setIsDeleting(null)
       }, 2000);
   }
+  const onChanesearchInput = (e) =>{
+    const key = e.target.value;
+     fetch("http://localhost:3003/users?q="+key).then((data) => {
+      data.json().then((resp)=>{
+        console.log(resp);
+      })
+    })
+    
+  }
 
     const avatar_img = {
      height:'50px',
@@ -53,7 +62,7 @@ const Teacher = (props) => {
   return (
     <div>
         <div className="md-form mt-0" style={{width: "500px",marginLeft:"800px"}}>
-          <input className="form-control" type="text" placeholder="Search"  aria-label="Search" />
+          <input className="form-control" type="text" placeholder="Search"  onChange={onChanesearchInput} aria-label="Search" />
         </div>
       <table className="table">
         <thead>
