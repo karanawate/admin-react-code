@@ -14,6 +14,7 @@ const Navbar = () =>{
                     {/* <Link className="nav-link" to="Teacher:id">Student-view</Link> */}
                     <Link className="nav-link" to="teacher">Teacher</Link>
                     <Link className="nav-link" to="/View">View</Link>
+                    <Link className="nav-link" to="/admin-list">Admin-list</Link>
                 </div>
                 </div>
             </div>

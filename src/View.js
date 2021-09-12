@@ -1,9 +1,11 @@
-import React from 'react';
+import React,{memo} from 'react';
 import { useHistory, useLocation } from 'react-router';
 
-const View = () => {
+
+const View = (props) => {
 	const location = useLocation();
 	const history = useHistory();
+	console.log(props.data);
 
 	return <div>
 		<div>
@@ -16,4 +18,4 @@ const View = () => {
 		</div>
 	</div>
 }
-export default View;
+export default memo(View);

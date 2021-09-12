@@ -7,6 +7,7 @@ import Users from "./Users";
 import Studentview from "./Studentview";
 import Edituser from "./Edituser";
 import View from "./View";
+import Adminlist from './Adminlist';
 import {BrowserRouter as Router,Route,Switch,Link } from "react-router-dom";
 
 
@@ -22,6 +23,7 @@ function App() {
           <Route exact  path="/teacher/:id"  component={Studentview} />
           <Route exact  path="/edit/:id"  component={Edituser} />
           <Route exact  path="/view"  component={View} />
+          <Route exact  path="/admin-list"  component={Adminlist} />
         </Switch>
       </div>
     </Router>
