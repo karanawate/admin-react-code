@@ -35,7 +35,7 @@ const Home =  () => {
                     <input 
                     type="text"
                     className="form-control form-control-lg"
-                    name="name"
+                    name="phone"
                     placeholder="enter first name"
                     onChange={onInputChange}
                     />
@@ -45,7 +45,7 @@ const Home =  () => {
                     <input 
                     type="text"
                     className="form-control form-control-lg"
-                    name="username"
+                    name="password"
                     placeholder="enter username name"
                     onChange={onInputChange}
                     />
